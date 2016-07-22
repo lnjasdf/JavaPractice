@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5p %c{1} %M %L - %m%ex{1}%n"/>
+        </Console>
+
+        <RollingFile name="infoFile" fileName="logs/info.log"
+                     filePattern="logs/$${date:yyyy-MM}/%d{yyyy-MM-dd}.info.log.%i.gz">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5p %c{1} %M %L - %m%ex{1}%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="errFile" fileName="logs/error.log"
+                     filePattern="logs/$${date:yyyy-MM}/%d{yyyy-MM-dd}.error.log.%i.gz">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5p %n%ex"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="ALL">
+            <appender-ref level="ALL" ref="console" />
+            <appender-ref level="ALL" ref="infoFile"/>
+            <appender-ref level="ERROR" ref="errFile"/>
+        </root>
+    </loggers>
+</configuration>
