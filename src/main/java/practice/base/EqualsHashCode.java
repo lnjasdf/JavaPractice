@@ -1,4 +1,4 @@
-package java.practice;
+package practice.base;
 
 /**
  * Created by lnjasdf on 2016/7/4.
