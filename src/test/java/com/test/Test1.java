@@ -1,5 +1,7 @@
 package com.test;
 
+import org.junit.Test;
+
 /**
  * Created by intron on 2016/6/26 0026.
  */
