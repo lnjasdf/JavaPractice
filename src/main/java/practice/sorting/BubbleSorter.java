@@ -3,6 +3,7 @@ package practice.sorting;
 /**
  * Created by intron on 2017/3/29 0029.
  * 冒泡排序
+ * 时间复杂度 O(n^2)
  */
 public class BubbleSorter implements Sortable{
 

@@ -3,6 +3,7 @@ package practice.sorting;
 /**
  * Created by intron on 2016/8/24 0024.
  * 插入排序
+ * 时间复杂度 O(n^2)
  */
 public class InsertSorter implements Sortable{
 

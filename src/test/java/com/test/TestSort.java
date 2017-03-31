@@ -1,9 +1,7 @@
 package com.test;
 
 import org.junit.Test;
-import practice.sorting.BubbleSorter;
-import practice.sorting.InsertSorter;
-import practice.sorting.Sortable;
+import practice.sorting.*;
 
 /**
  * Created by intron on 2017/3/29 0029.
@@ -20,6 +18,16 @@ public class TestSort {
     @Test
     public void testInsertSorter() {
         sort(new InsertSorter(), listInt);
+    }
+
+    @Test
+    public void testSelectionSorter() {
+        sort(new SelectionSorter(), listInt);
+    }
+
+    @Test
+    public void testMergeSorter() {
+        sort(new MergeSorter(), listInt);
     }
 
     private void sort(Sortable sortable, int[] list) {
