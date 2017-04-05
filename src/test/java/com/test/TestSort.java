@@ -30,6 +30,11 @@ public class TestSort {
         sort(new MergeSorter(), listInt);
     }
 
+    @Test
+    public void testQuickSorter() {
+        sort(new Quicksorter(), listInt);
+    }
+
     private void sort(Sortable sortable, int[] list) {
         System.out.println(sortable.getName());
         System.out.println("排序之前：");
