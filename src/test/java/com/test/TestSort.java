@@ -35,6 +35,11 @@ public class TestSort {
         sort(new Quicksorter(), listInt);
     }
 
+    @Test
+    public void ShellSorter() {
+        sort(new ShellSorter(), listInt);
+    }
+
     private void sort(Sortable sortable, int[] list) {
         System.out.println(sortable.getName());
         System.out.println("排序之前：");
