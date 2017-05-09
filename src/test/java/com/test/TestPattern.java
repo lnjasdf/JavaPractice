@@ -11,6 +11,10 @@ import pattern.creational.Factory.SmsSender;
 import pattern.creational.Prototype.Professor;
 import pattern.creational.Prototype.Student;
 import pattern.creational.Singleton.Singleton3;
+import pattern.structural.Decorator.Component;
+import pattern.structural.Decorator.ConcreteComponent;
+import pattern.structural.Decorator.ConcreteDecorator1;
+import pattern.structural.Decorator.ConcreteDecorator2;
 
 import java.io.IOException;
 
@@ -95,4 +99,9 @@ public class TestPattern {
         out.println(student1);
     }
 
+    @Test
+    public void testDecorator() {
+        Component component = new ConcreteDecorator2(new ConcreteDecorator1(new ConcreteComponent()));
+        component.sampleOperation();
+    }
 }
