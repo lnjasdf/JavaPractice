@@ -1,5 +1,6 @@
 package offer;
 
+import offer.data.ILink;
 import offer.data.ListNode;
 
 import java.util.Stack;
@@ -22,7 +23,7 @@ public class Question5 {
             return;
         }
         Stack<T> stack = new Stack<>();
-        ListNode<T> curr = head;
+        ILink<T> curr = head;
         stack.push(curr.getValue());
         while (curr.hasNext()) {
             curr = curr.getNext();
@@ -38,7 +39,7 @@ public class Question5 {
      * @param head
      * @param <T>
      */
-    public static <T> void reversedOrderPrint2(ListNode<T> head) {
+    public static <T> void reversedOrderPrint2(ILink<T> head) {
         if (head.hasNext()) {
             reversedOrderPrint2(head.getNext());
         }

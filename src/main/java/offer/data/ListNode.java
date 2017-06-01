@@ -3,9 +3,9 @@ package offer.data;
 /**
  * Created by lnjasdf on 2017/5/23.
  */
-public class ListNode<T> {
+public class ListNode<T> implements ILink<T>{
     private T value;
-    private ListNode<T> next;
+    private ILink<T> next;
 
     public ListNode() {
 
@@ -29,12 +29,12 @@ public class ListNode<T> {
         return head;
     }
 
-    public static <T> void print(ListNode<T> head) {
+    public static <T> void print(ILink<T> head) {
         if (head == null) {
             System.out.println("null");
             return;
         }
-        ListNode<T> curr = head;
+        ILink<T> curr = head;
         System.out.println(curr.getValue());
         while (curr.hasNext()) {
             curr = curr.getNext();
@@ -54,11 +54,11 @@ public class ListNode<T> {
         this.value = value;
     }
 
-    public ListNode<T> getNext() {
+    public ILink<T> getNext() {
         return next;
     }
 
-    public void setNext(ListNode<T> next) {
+    public void setNext(ILink<T> next) {
         this.next = next;
     }
 }
