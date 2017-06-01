@@ -1,5 +1,8 @@
 package com.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.System.out;
 
 /**
@@ -9,10 +12,17 @@ public class Test1 implements AutoCloseable{
 
 
     static public void main(String[] args) {
-        try (Test1 t = new Test1()) {
-            out.println("hello world");
-        } catch (Exception e) {
-
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(null);
+        list.add(null);
+        list.add(3);
+        for (Integer integer : list) {
+            if (integer != null)
+                System.out.println(integer);
+            else
+                System.out.println("null");
         }
     }
 
