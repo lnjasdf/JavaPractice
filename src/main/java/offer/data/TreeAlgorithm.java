@@ -1,8 +1,6 @@
 package offer.data;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by lnjasdf on 2017/6/1.
@@ -97,8 +95,59 @@ public class TreeAlgorithm<T> implements ITreeAlgorithm<T> {
 
     @Override
     public ITree<T> Deserialize(List<T> list) {
-        if (list == null)
+        if (list == null || list.size() % 2 == 0)
             return null;
-        return null;
+        Iterator<T> iterator = list.iterator();
+        T value = iterator.next();
+        ITree<T> head = new TreeNode<>(value);
+        Queue<ITree<T> > queue = new LinkedList<>();
+        queue.add(head);
+        int num = 1;
+        while (iterator.hasNext()) {
+            int count = 0;
+            for (int i = 0; i < num; i++) {
+                T leftValue = iterator.hasNext() ? iterator.next() : null;
+                T rightValue = iterator.hasNext() ? iterator.next() : null;
+                ITree<T> node = queue.poll();
+                if (leftValue != null) {
+                    ITree<T> left = new TreeNode<>(leftValue);
+                    node.setLeft(left);
+                    queue.add(left);
+                    count++;
+                }
+                if (rightValue != null) {
+                    ITree<T> right = new TreeNode<>(rightValue);
+                    node.setRight(right);
+                    queue.add(right);
+                    count++;
+                }
+            }
+            num = count;
+        }
+        return head;
+    }
+
+    private static class PrintTreeNode implements  ITreeNode {
+
+        @Override
+        public void node(ITree node) {
+            if (node != null) {
+                System.out.print(node.getValue() + " ");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Integer[] array = {1, 2, 3, 4, 5, null, null, null, 9, null, null, null, null};
+        TreeAlgorithm<Integer> algorithm = new TreeAlgorithm<>();
+        ITree<Integer> tree = algorithm.Deserialize(Arrays.asList(array));
+        algorithm.preorderTraversal(tree, new PrintTreeNode());
+        System.out.println();
+        algorithm.inorderTraversal(tree, new PrintTreeNode());
+        System.out.println();
+        algorithm.postorderTraversal(tree, new PrintTreeNode());
+        System.out.println();
+        algorithm.levelOrderTraversal(tree, new PrintTreeNode());
+        System.exit(1);
     }
 }

@@ -8,6 +8,14 @@ public class TreeNode<T> implements ITree<T> {
     private ITree<T> right;
     private T value;
 
+    public TreeNode() {
+
+    }
+
+    public TreeNode(T value) {
+        this.value = value;
+    }
+
     @Override
     public ITree<T> getLeft() {
         return left;
