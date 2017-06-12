@@ -8,47 +8,92 @@ import java.util.*;
 public class TreeAlgorithm<T> implements ITreeAlgorithm<T> {
     @Override
     public void preorderTraversal(ITree<T> tree, ITreeNode<T> treeNode) {
-        if (tree == null)
-            return;
-        preorder(tree, treeNode);
-    }
-
-    private void preorder(ITree<T> node, ITreeNode<T> treeNode) {
-        treeNode.node(node);
-        if (node.hasLeft())
-            preorder(node.getLeft(), treeNode);
-        if (node.hasRight())
-            preorder(node.getRight(), treeNode);
+        if (tree != null) {
+            treeNode.node(tree);
+            preorderTraversal(tree.getLeft(), treeNode);
+            preorderTraversal(tree.getRight(), treeNode);
+        }
     }
 
     @Override
     public void inorderTraversal(ITree<T> tree, ITreeNode<T> treeNode) {
-        if (tree == null)
-            return;
-        inorder(tree, treeNode);
-    }
-
-    private void inorder(ITree<T> node, ITreeNode<T> treeNode) {
-        if (node.hasLeft())
-            preorder(node.getLeft(), treeNode);
-        treeNode.node(node);
-        if (node.hasRight())
-            preorder(node.getRight(), treeNode);
+        if (tree != null) {
+            inorderTraversal(tree.getLeft(), treeNode);
+            treeNode.node(tree);
+            inorderTraversal(tree.getRight(), treeNode);
+        }
     }
 
     @Override
     public void postorderTraversal(ITree<T> tree, ITreeNode<T> treeNode) {
-        if (tree == null)
-            return;
-        postorder(tree, treeNode);
+        if (tree != null) {
+            postorderTraversal(tree.getLeft(), treeNode);
+            postorderTraversal(tree.getRight(), treeNode);
+            treeNode.node(tree);
+        }
     }
 
-    private void postorder(ITree<T> node, ITreeNode<T> treeNode) {
-        if (node.hasLeft())
-            preorder(node.getLeft(), treeNode);
-        if (node.hasRight())
-            preorder(node.getRight(), treeNode);
-        treeNode.node(node);
+    public void preorder(ITree<T> tree, ITreeNode<T> treeNode) {
+        if (tree == null)
+            return;
+        Stack<Pair<ITree<T>, Boolean>> stack = new Stack<>();
+        stack.push(new Pair<>(tree, false));
+        while (!stack.isEmpty()) {
+            ITree<T> first = stack.peek().getFirst();
+            Boolean second = stack.peek().getSecond();
+            stack.pop();
+            if (first == null)
+                continue;
+            if (second) {
+                treeNode.node(first);
+            } else {
+                stack.push(new Pair<>(first.getRight(), false));
+                stack.push(new Pair<>(first.getLeft(), false));
+                stack.push(new Pair<>(first, true));
+            }
+        }
+    }
+
+    public void inorder(ITree<T> tree, ITreeNode<T> treeNode) {
+        if (tree == null)
+            return;
+        Stack<Pair<ITree<T>, Boolean>> stack = new Stack<>();
+        stack.push(new Pair<>(tree, false));
+        while (!stack.isEmpty()) {
+            ITree<T> first = stack.peek().getFirst();
+            Boolean second = stack.peek().getSecond();
+            stack.pop();
+            if (first == null)
+                continue;
+            if (second) {
+                treeNode.node(first);
+            } else {
+                stack.push(new Pair<>(first.getRight(), false));
+                stack.push(new Pair<>(first, true));
+                stack.push(new Pair<>(first.getLeft(), false));
+            }
+        }
+    }
+
+    public void postorder(ITree<T> tree, ITreeNode<T> treeNode) {
+        if (tree == null)
+            return;
+        Stack<Pair<ITree<T>, Boolean>> stack = new Stack<>();
+        stack.push(new Pair<>(tree, false));
+        while (!stack.isEmpty()) {
+            ITree<T> first = stack.peek().getFirst();
+            Boolean second = stack.peek().getSecond();
+            stack.pop();
+            if (first == null)
+                continue;
+            if (second) {
+                treeNode.node(first);
+            } else {
+                stack.push(new Pair<>(first, true));
+                stack.push(new Pair<>(first.getRight(), false));
+                stack.push(new Pair<>(first.getLeft(), false));
+            }
+        }
     }
 
     @Override
@@ -147,7 +192,12 @@ public class TreeAlgorithm<T> implements ITreeAlgorithm<T> {
         System.out.println();
         algorithm.postorderTraversal(tree, new PrintTreeNode());
         System.out.println();
-        algorithm.levelOrderTraversal(tree, new PrintTreeNode());
+        System.out.println();
+        algorithm.preorder(tree, new PrintTreeNode());
+        System.out.println();
+        algorithm.inorder(tree, new PrintTreeNode());
+        System.out.println();
+        algorithm.postorder(tree, new PrintTreeNode());
         System.exit(1);
     }
 }
